@@ -1,5 +1,5 @@
 .portfolio-form-wrapper {
-    @include base-grid
+    @include base-grid();
     grid-template-columns: 1fr;
     padding: 42px;
 
