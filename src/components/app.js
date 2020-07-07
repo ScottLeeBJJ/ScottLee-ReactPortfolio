@@ -6,9 +6,7 @@ import {
 } from "react-router-dom";
 
 import axios from 'axios';
-import { library } from "@fortawesome/fontawesome-svg-core";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faTrash, faSignOutAlt, faEdit, faSpinner, faPlusCircle } from "@fortawesome/free-solid-svg-icons";
 
 import PortfolioContainer from './portfolio/portfolio-container'
 import NavigationContainer from './navigation/navigation-container'
@@ -21,12 +19,14 @@ import PortfolioManager from './pages/portfolio-manager';
 import PortfolioDetail from './portfolio/portfolio-detail';
 import Auth from './pages/auth';
 import NoMatch from './pages/no-match';
+import Icons from '../helpers/icons';
 
-library.add(faTrash, faSignOutAlt, faEdit, faSpinner, faPlusCircle);
 
 export default class App extends Component {
   constructor(props) {
     super(props);
+
+    Icons();
 
     this.state = {
       loggedInStatus: "NOT_LOGGED_IN"
@@ -131,7 +131,12 @@ export default class App extends Component {
 
             <Route  path="/contact" component={Contact} />
 
-            <Route  path="/blog" component={Blog} />
+            <Route  path="/blog" 
+              render={props => (
+                <Blog {...props} loggedInStatus={this.state.loggedInStatus} />
+              )}
+            />
+
             
             <Route  path="/b/:slug" component={BlogDetail} />
 
